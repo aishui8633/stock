@@ -1,0 +1,59 @@
+{
+  "watchlist": [
+    {"code": "600519", "name": "贵州茅台", "strategies": ["breakthrough"]},
+    {"code": "000858", "name": "五粮液", "strategies": []},
+    {"code": "601318", "name": "中国平安", "strategies": []},
+    {"code": "000001", "name": "平安银行", "strategies": []},
+    {"code": "601899", "name": "紫金矿业", "strategies": ["volume_surge"]}
+  ],
+
+  "alerts": [
+    {"code": "600519", "type": "pct_change_above", "value": 3.0},
+    {"code": "600519", "type": "pct_change_below", "value": -3.0},
+    {"code": "000858", "type": "pct_change_above", "value": 3.0},
+    {"code": "601318", "type": "pct_change_above", "value": 2.0},
+    {"code": "601899", "type": "volume_surge", "value": 2.0}
+  ],
+
+  "strategies": [
+    {
+      "name": "放量上涨",
+      "condition": {
+        "change_pct_min": 2.0,
+        "change_pct_max": 9.5,
+        "volume_ratio_min": 1.5,
+        "amount_min": 100000000,
+        "exclude_st": true
+      }
+    },
+    {
+      "name": "底部放量",
+      "condition": {
+        "change_pct_min": 0.5,
+        "change_pct_max": 5.0,
+        "volume_ratio_min": 2.5,
+        "amount_min": 50000000,
+        "exclude_st": true
+      }
+    },
+    {
+      "name": "高换手活跃股",
+      "condition": {
+        "turnover_min": 8.0,
+        "change_pct_min": 1.0,
+        "amount_min": 50000000,
+        "exclude_st": true
+      }
+    }
+  ],
+
+  "channels": [
+    {
+      "type": "webhook",
+      "name": "openclaw",
+      "enabled": true,
+      "url": "",
+      "template": "openclaw"
+    }
+  ]
+}
