@@ -1,18 +1,17 @@
 {
   "watchlist": [
-    {"code": "600519", "name": "贵州茅台", "strategies": ["breakthrough"]},
-    {"code": "000858", "name": "五粮液", "strategies": []},
-    {"code": "601318", "name": "中国平安", "strategies": []},
-    {"code": "000001", "name": "平安银行", "strategies": []},
-    {"code": "601899", "name": "紫金矿业", "strategies": ["volume_surge"]}
+    {"code": "002218", "name": "拓日新能", "strategies": []},
+    {"code": "601789", "name": "宁波建工", "strategies": []},
+    {"code": "600320", "name": "振华重工", "strategies": []}
   ],
 
   "alerts": [
-    {"code": "600519", "type": "pct_change_above", "value": 3.0},
-    {"code": "600519", "type": "pct_change_below", "value": -3.0},
-    {"code": "000858", "type": "pct_change_above", "value": 3.0},
-    {"code": "601318", "type": "pct_change_above", "value": 2.0},
-    {"code": "601899", "type": "volume_surge", "value": 2.0}
+    {"code": "002218", "type": "pct_change_above", "value": 3.0},
+    {"code": "002218", "type": "pct_change_below", "value": -3.0},
+    {"code": "601789", "type": "pct_change_above", "value": 3.0},
+    {"code": "601789", "type": "pct_change_below", "value": -3.0},
+    {"code": "600320", "type": "pct_change_above", "value": 3.0},
+    {"code": "600320", "type": "pct_change_below", "value": -3.0}
   ],
 
   "strategies": [
