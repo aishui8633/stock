@@ -1,17 +1,23 @@
 {
   "watchlist": [
-    {"code": "002218", "name": "拓日新能", "strategies": []},
-    {"code": "601789", "name": "宁波建工", "strategies": []},
-    {"code": "600320", "name": "振华重工", "strategies": []}
+    {"code": "002218", "name": "拓日新能", "strategies": [], "cost": 5.600},
+    {"code": "601789", "name": "宁波建工", "strategies": [], "cost": 6.030},
+    {"code": "600320", "name": "振华重工", "strategies": [], "cost": 5.360}
   ],
 
   "alerts": [
     {"code": "002218", "type": "pct_change_above", "value": 3.0},
     {"code": "002218", "type": "pct_change_below", "value": -3.0},
+    {"code": "002218", "type": "cost_profit_pct", "value": 3.0},
+    {"code": "002218", "type": "cost_loss_pct", "value": -3.0},
     {"code": "601789", "type": "pct_change_above", "value": 3.0},
     {"code": "601789", "type": "pct_change_below", "value": -3.0},
+    {"code": "601789", "type": "cost_profit_pct", "value": 3.0},
+    {"code": "601789", "type": "cost_loss_pct", "value": -3.0},
     {"code": "600320", "type": "pct_change_above", "value": 3.0},
-    {"code": "600320", "type": "pct_change_below", "value": -3.0}
+    {"code": "600320", "type": "pct_change_below", "value": -3.0},
+    {"code": "600320", "type": "cost_profit_pct", "value": 3.0},
+    {"code": "600320", "type": "cost_loss_pct", "value": -3.0}
   ],
 
   "strategies": [

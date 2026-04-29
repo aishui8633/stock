@@ -226,17 +226,25 @@ def main():
             print("获取行情失败")
             return
         
-        print(f"\n{'='*70}")
+        print(f"\n{'='*85}")
         print(f"📋 自选股行情 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print(f"{'='*70}")
-        print(f"{'代码':<8} {'名称':<10} {'最新价':<8} {'涨跌幅%':<8} {'成交额(万)':<12} {'量比':<6}")
-        print(f"{'-'*70}")
+        print(f"{'='*85}")
+        print(f"{'代码':<8} {'名称':<10} {'最新价':<8} {'涨跌幅%':<8} {'成本价':<8} {'盈亏%':<8} {'成交额(万)':<12} {'量比':<6}")
+        print(f"{'-'*85}")
         
         for _, q in quotes.iterrows():
+            code = q['code']
             amount_wan = q['amount'] / 10000 if q['amount'] else 0
-            print(f"{q['code']:<8} {q['name']:<10} {q['price']:<8} {q['change_pct']:<8.2f} {amount_wan:<12.0f} {q['volume_ratio']:<6.2f}")
+            cost = next((s.get('cost') for s in engine.watchlist if s.get('code') == code), None)
+            if cost:
+                profit_pct = (q['price'] - cost) / cost * 100
+                profit_str = f"{profit_pct:+.2f}"
+            else:
+                profit_str = "-"
+            cost_str = f"{cost:.3f}" if cost else "-"
+            print(f"{code:<8} {q['name']:<10} {q['price']:<8} {q['change_pct']:<8.2f} {cost_str:<8} {profit_str:<8} {amount_wan:<12.0f} {q['volume_ratio']:<6.2f}")
         
-        print(f"{'='*70}")
+        print(f"{'='*85}")
     
     else:
         parser.print_help()

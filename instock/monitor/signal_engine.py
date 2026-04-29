@@ -131,6 +131,32 @@ class SignalEngine:
                         'data': stock.to_dict()
                     }
             
+            elif alert_type in ('cost_profit_pct', 'cost_loss_pct'):
+                # 基于成本价的盈亏告警
+                cost = self._get_cost_price(code)
+                if cost is None or cost <= 0:
+                    continue
+                current_price = stock['price']
+                profit_pct = (current_price - cost) / cost * 100
+                threshold = alert.get('value', 3.0)
+                
+                if alert_type == 'cost_profit_pct' and profit_pct >= threshold:
+                    signal = {
+                        'type': 'cost_alert',
+                        'code': code,
+                        'name': stock['name'],
+                        'message': f"📈 {stock['name']}({code}) 盈利达 {profit_pct:+.2f}% (成本 {cost:.3f} → 现价 {current_price:.2f})，已超过阈值 {threshold}%",
+                        'data': {**stock.to_dict(), 'cost': cost, 'profit_pct': round(profit_pct, 2)}
+                    }
+                elif alert_type == 'cost_loss_pct' and profit_pct <= threshold:
+                    signal = {
+                        'type': 'cost_alert',
+                        'code': code,
+                        'name': stock['name'],
+                        'message': f"📉 {stock['name']}({code}) 亏损达 {profit_pct:+.2f}% (成本 {cost:.3f} → 现价 {current_price:.2f})，已超过阈值 {threshold}%",
+                        'data': {**stock.to_dict(), 'cost': cost, 'profit_pct': round(profit_pct, 2)}
+                    }
+            
             if signal:
                 signals.append(signal)
                 self._fired_alerts.add(alert_id)
@@ -217,6 +243,13 @@ class SignalEngine:
             reasons.append(f"成交额≥{condition['amount_min']/10000:.0f}万")
         
         return " | ".join(reasons)
+    
+    def _get_cost_price(self, code):
+        """从自选股列表中获取成本价"""
+        for item in self.watchlist:
+            if item.get('code') == code and 'cost' in item:
+                return float(item['cost'])
+        return None
     
     def reset_fired_alerts(self):
         """重置已触发告警记录（每日收盘后调用）"""
